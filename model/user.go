@@ -1,14 +1,10 @@
 package model
 
-// User represents a user entity
 type User struct {
-	ID       int    `json:"id"`
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-	Role     string `json:"role"`
-
-	// Kenangan represents the list of memories associated with the user
-	// @gorm:"foreignKey:UserID"
+	ID       int        `json:"id" example:"1" format:"int" minimum:"1"`
+	Name     string     `json:"name" example:"John Doe"`
+	Email    string     `json:"email" example:"john.doe@example.com"`
+	Password string     `json:"password" example:"********"`
+	Role     string     `json:"role" enum:"admin,user"`
 	Kenangan []Kenangan `json:"kenangan" gorm:"foreignKey:UserID"`
 }

@@ -19,6 +19,18 @@ func HandlerUser(UserRepository repositories.UserRespository) *UserHandler {
 	return &UserHandler{UserRepository}
 }
 
+// CreateUser godoc
+// @Summary Create a new user
+// @Description Create a new user with the provided information
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param user body userdto.CreateUserRequest true "User object to be created"
+// @Success 200 {object} dto.SuccessResult
+// @Failure 400 {object} dto.ErrorResult
+// @Failure 500 {object} dto.ErrorResult
+// @Router /user [post]
+
 func (h *UserHandler) CreateUser(c echo.Context) error {
 	request := new(userdto.CreateUserRequest)
 	if err := c.Bind(request); err != nil {
@@ -48,11 +60,13 @@ func (h *UserHandler) CreateUser(c echo.Context) error {
 
 // GetUserByID godoc
 // @Summary Get user by ID
-// @Description Get user details by ID
+// @Description Get user information by the provided ID
 // @Tags User
+// @Accept json
+// @Produce json
 // @Param id path int true "User ID"
-// @Success 200 {object} UserResponse
-// @Failure 404 {object} ErrorResponse
+// @Success 200 {object} dto.SuccessResult
+// @Failure 400 {object} dto.ErrorResult
 // @Router /user/{id} [get]
 
 func (h *UserHandler) GetUserByID(c echo.Context) error {
